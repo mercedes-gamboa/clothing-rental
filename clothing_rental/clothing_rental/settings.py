@@ -43,8 +43,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.contrib.flatpages",
     "accounts",
 ]
+
+SITE_ID = 1
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+ACCOUNT_USERNAME_REQUIRED = False
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
