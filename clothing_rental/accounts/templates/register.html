@@ -3,11 +3,6 @@
 {% block title %}Sign up{% endblock title %}
 
 {% block body %}
-    <br><br>
-
-    {% if CustomUser %}
-    <div>Welcome {{CustomUser.first_name}}! Your account for {{ CustomUser.email }}  has been successfully created!</div>
-    {% endif %}
 
     <br><br>
     <form action="{% url "register" %}" method="post">
