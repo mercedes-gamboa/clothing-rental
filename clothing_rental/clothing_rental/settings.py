@@ -26,10 +26,12 @@ dotenv.load_dotenv()
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+# SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = 's;2i3ucfmc30ivn3biufb2309jofkc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") == "True"
+# DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = "True"
 
 ALLOWED_HOSTS = []
 
@@ -82,11 +84,13 @@ WSGI_APPLICATION = "clothing_rental.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "clothingrental",
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "root1234"
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": "clothingrental",
+        # "HOST": "localhost",
+        # "USER": "root",
+        # "PASSWORD": "root1234"
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db.sqlite",
     }
 }
 
@@ -131,3 +135,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'accounts.User'
