@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
+from accounts.models import Profile
+
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=True)
@@ -18,3 +20,9 @@ class UserRegistrationForm(UserCreationForm):
             user.save()
 
         return user
+
+class ProfileForm(forms.ModelForm):
+    #  is this argument correct?
+    class Meta:
+        model = Profile
+        fields = ('address', 'phone', 'birth_date')
