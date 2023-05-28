@@ -1,6 +1,8 @@
 from django.shortcuts import render
+
+
 # from about.forms import ContactForm
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 
 # Create your views here.
 def about_page(request):
@@ -30,7 +32,6 @@ def about_page(request):
 #
 #
 #     return render(request, 'about/about.html', {'form': form})
-
 
 
 # def about_page(request):

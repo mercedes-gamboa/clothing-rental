@@ -58,3 +58,12 @@ class VariationOption(models.Model):
     value = models.CharField(max_length=200)
     variation = models.ForeignKey(Variation, on_delete=models.CASCADE)
 
+class ClothingItem(models.Model):
+    quantity_in_stock = models.IntegerField(validators=[MinValueValidator(0)])
+    item_image = models.ImageField(width_field=None, height_field=None)
+    #price = models.DecimalField(max_digits=65, decimal_places=2)
+    product_id = models.ForeignKey(Clothes, on_delete=models.DO_NOTHING)
+
+class ClothingConfiguration(models.Model):
+    clothing_item_id = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)
+    variation_option_id = models.ForeignKey(VariationOption, on_delete=models.CASCADE)
