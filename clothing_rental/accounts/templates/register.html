@@ -2,21 +2,18 @@
 
 {% block title %}Sign up{% endblock title %}
 
+{% block content %}
+
 {% block body %}
 
-        <h2>{{ user.get_full_name }}</h2>
-        <ul>
-          <li>Phone: {{ user.phone }}</li>
-          <li>Address: {{ user.profile.address }}</li>
-          <li>Birth Date: {{ user.profile.birth_date }}</li>
-        </ul>
+    <br><br>
+    <form action="{% url "register" %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
 
-<!--    <br><br>-->
-<!--    <form action="{% url "register" %}" method="post">-->
-<!--        {% csrf_token %}-->
-<!--        {{form.as_p}}-->
-
-<!--        <input type="submit" value="Submit">-->
-<!--    </form>-->
+        <input type="submit" value="Submit">
+    </form>
 
 {% endblock body %}
+
+{% endblock content %}
