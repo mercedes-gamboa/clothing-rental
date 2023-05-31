@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Category List</h2>
+    <p>
+        <a href="{% url 'add_category' %}"><button class="btn">Add Category</button></a>
+    </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for category in category_list %}
+                </tr>
+                <tr>
+                    <td>{{ category.category_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

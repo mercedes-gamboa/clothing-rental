@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>Update variation</h2>
+<form method="post">
+<div>
+  {% csrf_token %} {{ variation }}
+  <input type="submit" value="Submit" />
+</div>
+</form>
+{% endblock %}

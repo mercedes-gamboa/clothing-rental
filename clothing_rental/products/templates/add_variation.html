@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h2>Add new category</h2>
+    <h2>Add new variation</h2>
     <p>
-        <a href="{% url 'category_list'%}" class="btn btn-primary">View category list</a>
+        <a href="{% url 'variation_list'%}" class="btn btn-primary">View variation list</a>
     </p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Add category</button>
+        <button type="submit">Add variation</button>
     </form>
 
 {% endblock body %}

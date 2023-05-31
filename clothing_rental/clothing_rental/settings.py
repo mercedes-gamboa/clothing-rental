@@ -45,12 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "about",
-    "accounts",
-    "main",
-    "steps",
-    "products",
-    "orders",
+
+    "about.apps.AboutUsConfig",
+    "accounts.apps.AccountsConfig",
+    "main.apps.MainConfig",
+    "steps.apps.HowItWorksConfig",
+    "products.apps.ProductsConfig",
+    "orders.apps.OrdersConfig",
 
 ]
 

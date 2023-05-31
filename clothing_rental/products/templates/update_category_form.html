@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>Update category</h2>
+<form method="post">
+<div>
+  {% csrf_token %} {{ category }}
+  <input type="submit" value="Submit" />
+</div>
+</form>
+{% endblock %}

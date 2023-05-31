@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Add new variation option</h2>
+    <p>
+        <a href="#"</a>
+    </p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{variationoption}}
+        <button type="submit">Add variation</button>
+    </form>
+
+{% endblock body %}
