@@ -9,11 +9,12 @@ urlpatterns = [
     path("products/", views.add_clothes, name="new_clothing_item"),
     path("<int:pk>/delete/", views.ClothesDeleteView.as_view(), name="delete_clothes_item"),
     path("<int:pk>/clothing-item", views.ClothingItemDetailView.as_view(), name="clothing_item"),
+    path("update/clothes/<int:pk>", views.ClothesUpdateView.as_view(), name="clothes_update"),
 
     path("category/", views.CategoryCreateView.as_view(), name="add_category"),
     path("delete/category/<int:pk>", views.CategoryDeleteView.as_view(), name="delete_category"),
     path("list/category", views.CategoryListView.as_view(), name="category_list"),
-    #path("detail/category/<int:pk>", views.CategoryDetailView.as_view(), name="category_detail"),
+    path("detail/category/<int:pk>", views.CategoryDetailView.as_view(), name="category_detail"),
     path("update/category/<int:pk>", views.CategoryUpdateView.as_view(), name="category_update"),
 
     path("add/variation", views.VariationCreateView.as_view(), name="add_variation"),

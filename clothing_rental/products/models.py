@@ -2,41 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
 
-import products
 
-
-# Create your models here.
 class Category(models.Model):
-    # TOPS = 'Tops'
-    # BOTTOMS = 'Bottoms'
-    # DRESSSES = 'Dresses'
-    # SKIRTS = 'Skirts'
-    # COATS_JACKETS = 'Coats & Jackets'
-    # OUTWEAR = 'Outerwear'
-    # ACCESSORIES = 'Accessories'
-    # FORMAL_WEAR = 'Formal Wear'
-    # VINTAGE = 'Vintage'
-    # SUMMER = 'Summer'
-    # WINTER = 'Winter'
-    # FALL = 'Fall'
-    # SPRING = 'Spring'
-    #
-    # CATEGORY_CHOICES = (
-    #     (TOPS, 'Tops'),
-    #     (BOTTOMS, 'Bottoms'),
-    #     (DRESSSES, 'Dresses'),
-    #     (SKIRTS, 'Skirts'),
-    #     (COATS_JACKETS, 'Coats & Jackets'),
-    #     (OUTWEAR, 'Outerwear'),
-    #     (ACCESSORIES, 'Accessories'),
-    #     (FORMAL_WEAR, 'Formal Wear'),
-    #     (VINTAGE, 'Vintage'),
-    #     (SUMMER, 'Summer'),
-    #     (WINTER, 'Winter'),
-    #     (FALL, 'Fall'),
-    #     (SPRING,'Spring')
-    # )
-
     category_name = models.CharField(max_length=100)
 
     def __str__(self):

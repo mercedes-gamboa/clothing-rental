@@ -1,5 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
@@ -7,7 +6,7 @@ from django.urls import reverse_lazy
 from django.core.files.storage import FileSystemStorage
 
 from products.models import Clothes, ClothingItem, ClothingConfiguration, Category, Variation, VariationOption
-from .forms import ClothesForm, CategoryForm
+from .forms import ClothesForm, CategoryForm, VariationForm, ClothingItemForm, VariationOptionForms
 
 # Create your views here.
 # class AddClothingView(CreateView):
@@ -35,6 +34,22 @@ def add_clothes(request):
         "form": form
     })
 
+# class AddClothes(View):
+#     def get(self, request):
+#         form = ClothesForm()
+#         return render(
+#             request,
+#             "new_clothing_item.html",
+#             {"form": form}
+#         )
+#
+#     def post(self, request):
+#         form = ClothesForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("clothes_list")
+
+
 class ClothesListView(ListView):
     model = Clothes
     template_name = "clothes_list.html"
@@ -44,6 +59,11 @@ class ClothesDeleteView(DeleteView):
     model = Clothes
     success_url = reverse_lazy("clothes_list")
     template_name = "delete-clothes-item.html"
+
+class ClothesUpdateView(UpdateView):
+    model = Clothes
+    template_name = "products/clothes_update.html"
+    form_class = ClothesForm
 
 class ClothingItemDetailView(DetailView):
     model = ClothingItem
@@ -66,15 +86,16 @@ class CategoryListView(ListView):
     model = Category
     template_name = "category_list.html"
 
-# class CategoryDetailView(DetailView):
-#     model = Category
-#     template_name = "detail_category.html"
-#     context_object_name = "category"
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = "detail_category.html"
+    context_object_name = "category"
 
 class CategoryUpdateView(UpdateView):
   model = Category
   template_name = "update_category_form.html"
-  fields = ["category_name",]
+  form_class = CategoryForm
+
 
 """Variation Views"""
 class VariationCreateView(CreateView):
@@ -100,9 +121,9 @@ class VariationListView(ListView):
 
 
 class VariationUpdateView(UpdateView):
-  model = Variation
-  template_name = "update_variation.html"
-  fields = ["variation_name", "category"]
+    model = Variation
+    template_name = "update_variation.html"
+    form_class = VariationForm
 
 """VariationOptions Views"""
 class VariationOptionsCreateView(CreateView):
@@ -126,6 +147,6 @@ class VariationOptionListView(ListView):
     template_name = "variationoptions_list.html"
 
 class VariationOptionUpdateView(UpdateView):
-  model = VariationOption
-  template_name = "update_variationoptions.html"
-  fields = ["value", "variation"]
+    model = VariationOption
+    template_name = "update_variationoptions.html"
+    form_class = VariationOptionForms
