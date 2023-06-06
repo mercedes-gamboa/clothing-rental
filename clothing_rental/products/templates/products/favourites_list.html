@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Your Favorites</h1>
+
+  {% if favorite_items %}
+    <ul class="favorite-list">
+      {% for item in favorite_items %}
+        <li>
+          <div class="item-thumbnail">
+            <img src="{{ .image.url }}", style="width: 200px">
+          </div>
+          <div class="item-details">
+<!--            <h3>{{ item.product.name }}</h3>-->
+<!--            <p>{{ item.product.description }}</p>-->
+<!--            <p>Price: {{ item.product.price }}/day</p>-->
+            <a href="{% url 'add_to_cart' .id %}">Rent Now</a>
+            <a href="{% url 'remove_favorite' item.id %}">Remove from Favorites</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no favorite items yet.</p>
+  {% endif %}
+
+{% endblock %}

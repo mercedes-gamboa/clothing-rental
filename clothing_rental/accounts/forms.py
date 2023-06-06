@@ -4,12 +4,14 @@ from django.contrib.auth.forms import UserCreationForm
 
 from accounts.models import Profile
 
+User = get_user_model()
+
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=True)
 
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ["first_name", "last_name", "email", "password1", "password2"]
 
     def save(self, commit=True):
@@ -26,3 +28,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('address', 'phone', 'birth_date')
+
+
+class UserLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField()
+

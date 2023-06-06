@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Create your models here.
+from products.models import ClothingItem
+
 
 class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password, first_name, last_name, **extra_fields):
@@ -25,7 +27,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password, first_name, last_name, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_active", True)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, first_name, last_name, **extra_fields)
@@ -82,65 +84,39 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+
+class ShoppingCart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    clothing_items = models.ManyToManyField(ClothingItem, null=True, blank=True)
+
+    @receiver(post_save, sender=User)
+    def create_user_shopping_cart(sender, instance, created, **kwargs):
+        if created:
+            ShoppingCart.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_shopping_cart(sender, instance, **kwargs):
+        instance.profile.save()
+
+    def __str__(self):
+        return f" {self.user}'s cart{self.id}"
+
+class Favourite(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    clothing_items = models.ManyToManyField(ClothingItem, null=True, blank=True)
+
+    @receiver(post_save, sender=User)
+    def create_user_favorite(sender, instance, created, **kwargs):
+        if created:
+            Favourite.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_favorite(sender, instance, **kwargs):
+        instance.profile.save()
+
+    def __str__(self):
+        return f" {self.user} likes {self.clothing_items}"
+
+
 """END OF NEW """
-
-class Collection(models.Model):
-    title = models.CharField(max_length=255)
-    featured_product = models.ForeignKey(
-        'Product', on_delete=models.SET_NULL, null=True, related_name='+')
-
-
-class Product(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField()
-    description = models.TextField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-    inventory = models.IntegerField()
-    last_update = models.DateTimeField(auto_now=True)
-    collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
-
-"""
- These Order models have been recreated in the orders add.
- should be changes but check this model against it"""
-
-class Order(models.Model):
-    PAYMENT_STATUS_PENDING = 'P'
-    PAYMENT_STATUS_COMPLETE = 'C'
-    PAYMENT_STATUS_FAILED = 'F'
-    PAYMENT_STATUS_CHOICES = [
-        (PAYMENT_STATUS_PENDING, 'Pending'),
-        (PAYMENT_STATUS_COMPLETE, 'Complete'),
-        (PAYMENT_STATUS_FAILED, 'Failed')
-    ]
-
-    placed_at = models.DateTimeField(auto_now_add=True)
-    payment_status = models.CharField(
-        max_length=1, choices=PAYMENT_STATUS_CHOICES, default=PAYMENT_STATUS_PENDING)
-    customer = models.ForeignKey(User, on_delete=models.PROTECT)
-
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.PROTECT)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    quantity = models.PositiveSmallIntegerField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-
-"""end of order models to be checked"""
-
-
-class Address(models.Model):
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    customer = models.ForeignKey(
-        User, on_delete=models.CASCADE)
-
-
-class Cart(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
 

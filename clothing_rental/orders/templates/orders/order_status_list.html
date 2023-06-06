@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Order Status List</h2>
+    <p>
+        <a href="{% url 'add_order_status' %}"><button>Add Order</button></a>
+    </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in order_status_list %}
+                    <tr>
+                        <td>{{ object.status }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

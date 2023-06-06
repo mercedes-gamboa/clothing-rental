@@ -1,34 +1,19 @@
-from django.conf import settings
-from django.core.validators import MinValueValidator
-from django.db import models
+from django import forms
 
-class Order(models.Model):
-    ORDERED = "ORDERED"
-    PREPARING = "PREPARING"
-    ON_THE_WAY = "ON THE WAY"
-    CLIENT_WARDROBE = "CLIENT WARDROBE"
-    RETURNED = "RETURNED"
-    DONE = "DONE"
+from .models import Order, OrderStatus, OrderLine
 
-    STATUSES = (
-        (ORDERED, "Ordered"),
-        (PREPARING, "Preparing"),
-        (ON_THE_WAY, "On the way"),
-        (CLIENT_WARDROBE, "Client's wardrobe"),
-        (RETURNED, "Returned"),
-        (DONE, "Done"),
-    )
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ["user", "clothing_item", "date_to_be_returned", "confirmed_returned_date",
+                  "total_price", "status", "code"]
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name="orders", on_delete=models.CASCADE
-    )
+class OrderLineForm(forms.ModelForm):
+    class Meta:
+        model = OrderLine
+        fields = ["order", "inventory"]
 
-    # product
-    # price
-    # total price
-
-    status = models.CharField(max_length=50, choices=STATUSES, default=ORDERED)
-    created_at = models.DateTimeField(auto_now_add=True)
-    return_date = models.DateTimeField(auto_now=False, blank=True)
-    returned_at = models.DateTimeField(auto_now=True)
-
+class OrderStatusForm(forms.ModelForm):
+    class Meta:
+        model = OrderStatus
+        fields = ["status"]

@@ -7,36 +7,6 @@ import products
 
 # Create your models here.
 class Category(models.Model):
-    # TOPS = 'Tops'
-    # BOTTOMS = 'Bottoms'
-    # DRESSSES = 'Dresses'
-    # SKIRTS = 'Skirts'
-    # COATS_JACKETS = 'Coats & Jackets'
-    # OUTWEAR = 'Outerwear'
-    # ACCESSORIES = 'Accessories'
-    # FORMAL_WEAR = 'Formal Wear'
-    # VINTAGE = 'Vintage'
-    # SUMMER = 'Summer'
-    # WINTER = 'Winter'
-    # FALL = 'Fall'
-    # SPRING = 'Spring'
-    #
-    # CATEGORY_CHOICES = (
-    #     (TOPS, 'Tops'),
-    #     (BOTTOMS, 'Bottoms'),
-    #     (DRESSSES, 'Dresses'),
-    #     (SKIRTS, 'Skirts'),
-    #     (COATS_JACKETS, 'Coats & Jackets'),
-    #     (OUTWEAR, 'Outerwear'),
-    #     (ACCESSORIES, 'Accessories'),
-    #     (FORMAL_WEAR, 'Formal Wear'),
-    #     (VINTAGE, 'Vintage'),
-    #     (SUMMER, 'Summer'),
-    #     (WINTER, 'Winter'),
-    #     (FALL, 'Fall'),
-    #     (SPRING,'Spring')
-    # )
-
     category_name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -50,6 +20,7 @@ class Clothes(models.Model):
     def __str__(self):
         return self.clothing_name
 
+
 class Variation(models.Model):
     variation_name = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -62,7 +33,7 @@ class VariationOption(models.Model):
     variation = models.ForeignKey(Variation, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.value
+        return f'{self.value} {self.variation}'
 
 class ClothingItem(models.Model):
     quantity_in_stock = models.IntegerField(validators=[MinValueValidator(0)])
@@ -81,3 +52,10 @@ class ClothingConfiguration(models.Model):
 
     def __str__(self):
         return f'{self.clothing_item} ({self.variation_option})'
+
+
+class Inventory(models.Model):
+    clothes_item = models.ForeignKey(ClothingItem,on_delete=models.CASCADE)
+    detail = models.CharField(max_length=200)
+    code = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=60, decimal_places=2)

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+    <h2>All styles available:</h2>
+    <p>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="{% url 'new_clothing_item' %}" class="btn btn-primary">Add Clothes subcategory</a>
+            {% endif %}
+        {% endif %}
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Clothes</th>
+                <th>Item image</th>
+                <th>Price</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th></th>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    {%else%}
+                        <th>Detail</th>
+                    {% endif %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.clothes }}</td>
+                <td><img src="{{ item.item_image.url }}"></td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.name }}</td>
+                <td>
+                    <form method="POST" action="{% url 'add_to_cart' item.id %}">{% csrf_token %}
+                        <input type="submit" value="Add to cart">
+                    </form>
+                </td>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <td><a href="{% url 'delete_clothing_item' item.id %}">Delete</a></td>
+                        <td><a href="{% url 'update_clothing_item' item.id %}">Edit</a></td>
+                    {% else %}
+                        <td><a href="{% url 'clothing_item' item.id %}">Detail</a></td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock body %}
+
+

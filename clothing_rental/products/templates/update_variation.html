@@ -3,7 +3,8 @@
 <h2>Update variation</h2>
 <form method="post">
 <div>
-  {% csrf_token %} {{ variation }}
+  {% csrf_token %}
+  {{ form.as_p }}
   <input type="submit" value="Submit" />
 </div>
 </form>

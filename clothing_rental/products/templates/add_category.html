@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block body %}
+{% block content %}
     <h2>Add new category</h2>
     <p>
         <a href="{% url 'category_list'%}" class="btn btn-primary">View category list</a>
@@ -8,7 +8,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Add category</button>
+        <button type="submit">Add item to inventory</button>
     </form>
 
-{% endblock body %}
+{% endblock %}

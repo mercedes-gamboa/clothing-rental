@@ -92,7 +92,7 @@ WSGI_APPLICATION = "clothing_rental.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "testdatabase",
+        "NAME": "Clothing_data_2",
         "HOST": "localhost",
         "USER": "root",
         "PASSWORD": "root1234"

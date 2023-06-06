@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2>Delete Clothing Item</h2>
+<h2>Delete Clothes</h2>
 <form method="post">
 <div>
   {% csrf_token %}
@@ -8,8 +8,8 @@
   <input type="submit" value="Confirm" />
 </div>
   <p>
-    <a href="{% url 'clothes_list' %}">
-       <button>return to clothing list</button>
+    <a href="{% url 'clothing_item_list' %}">
+       <button>return to clothes list</button>
     </a>
   </p>
 </form>

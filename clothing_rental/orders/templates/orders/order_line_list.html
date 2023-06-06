@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% endblock %}
+
+{% block body %}
+    <h2>Clothing List</h2>
+    <p>
+        <a href="{% url 'new_clothing_item' %}" class="btn btn-primary">Add Clothing Item</a>
+    </p>
+    <p>
+        <a href="{% url 'clothes_list' %}"></a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in clothes %}
+            <tr>
+                <td>{{ item.category }}</td>
+                <td>{{ item.clothing_name }}</td>
+                <td>{{ item.description }}</td>
+                <td><img src="{{ item.clothing_image.url }}"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

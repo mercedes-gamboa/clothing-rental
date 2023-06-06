@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
-<h2>Variation Detail</h2>
-
-<div>
-<p>{{ variation.variation_name }}</p>
-<p>{{ variation.category }}</p>
-</div>
-</form>
+    <h2>Variation Detail</h2>
+        <div>
+            <p>{{ object.variation_name }}</p>
+            <p>{{ object.category }}</p>
+        </div>
 {% endblock %}

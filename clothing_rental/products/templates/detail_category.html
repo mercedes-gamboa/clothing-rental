@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+ {% extends "base.html" %}
 
-</body>
-</html>
+ {% block content %}
+     <h2>View Category:</h2>
+     {{category}}
+     <p>
+         <a href="{% url 'category_list' %}"><button class="btn">Return to category list</button></a>
+     </p>
+
+ {% endblock %}
