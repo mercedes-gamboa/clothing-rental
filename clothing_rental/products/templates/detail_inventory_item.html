@@ -1,0 +1,10 @@
+ {% extends "base.html" %}
+
+ {% block content %}
+     <h2>View Inventory Detail</h2>
+        {{inventory}}
+     <p>
+         <a href="{% url 'inventory_list' %}"><button class="btn">Return to inventory list</button></a>
+     </p>
+
+ {% endblock %}

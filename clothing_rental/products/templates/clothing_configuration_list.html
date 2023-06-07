@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h2>Clothing configuration list</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Clothing Configuration</th>
+            <th>category</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for clothing_configuration in object_list %}
+          <tr>
+              <td>{{ clothing_configuration.clothing_item }}</td>
+              <td>{{ clothing_configuration.variation_option }}</td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

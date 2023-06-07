@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Add clothing configuration</h2>
+    <p>
+        <a href="{% url 'clothing_configuration_list'%}" class="btn btn-primary">View clothing configuration list</a>
+    </p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Add configuration</button>
+    </form>
+
+{% endblock body %}

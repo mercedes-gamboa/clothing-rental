@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h2>{{clothing.name}}</h2>
+    <p>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="{% url 'new_clothing_item' %}" class="btn btn-primary">Add Clothes subcategory</a>
+            {% endif %}
+        {% endif %}
+    </p>
+
+    <p>Clothes: {{clothing.clothes}}</p>
+    <p>Item image</p>
+    <p>Price {{clothing.price}}</p>
+    <p>Code {{clothing.code}}</p>
+
+    <p><img src="{{ clothing.item_image.url }}" style="width: 200px"></p>
+
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <button>Delete</button>
+            <button>Edit</button>
+        {%else%}
+            <button>Detail</button>
+        {% endif %}
+    {% endif %}
+
+
+{% endblock %}
+
+

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Variation List</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Variation name</th>
+            <th>category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for variationoptions in variationoption_list %}
+          </tr>
+          <tr>
+            <td>{{ variationoptions.value }}</td>
+            <td>{{ variationoptions.variation }}</td>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

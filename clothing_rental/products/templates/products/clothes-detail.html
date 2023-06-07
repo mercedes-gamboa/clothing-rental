@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <h2>Detail View</h2>
+    <div>
+        <p>{{ clothes.category }}</p>
+        <p>{{ clothes.clothing_name }}</p>
+        <p>Description: {{ object.description }}</p>
+        <p><img src="{{ clothes.clothing_image.url }}" style="width: 300px"></p>
+    </div>
+    <p>
+        <a href="{% url 'clothes_list' %}"><button class="btn btn-primary">Return to Clothes list</button></a>
+    </p>
+    {% for clothing_item in clothes.clothingitem_set.all %}
+       <p> Code: {{clothing_item.code }}</p>
+        {% for clothingconfiguration in clothing_item.clothingconfiguration_set.all %}
+            <ul>
+                <li>{{ clothingconfiguration.variation_option.variation.variation_name}}: {{clothingconfiguration.variation_option.value}}</li>
+            </ul>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
+
+

@@ -1,0 +1,10 @@
+ {% extends "base.html" %}
+
+ {% block content %}
+     <h2>View Category:</h2>
+     {{category}}
+     <p>
+         <a href="{% url 'category_list' %}"><button class="btn">Return to category list</button></a>
+     </p>
+
+ {% endblock %}

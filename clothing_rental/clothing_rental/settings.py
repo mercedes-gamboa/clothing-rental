@@ -27,9 +27,11 @@ dotenv.load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+# SECRET_KEY = 's;2i3ucfmc30ivn3biufb2309jofkc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
+# DEBUG = "True"
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +45,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "accounts",
+
+    "about.apps.AboutUsConfig",
+    "accounts.apps.AccountsConfig",
+    "main.apps.MainConfig",
+    "steps.apps.HowItWorksConfig",
+    "products.apps.ProductsConfig",
+    "orders.apps.OrdersConfig",
+
 ]
 
 MIDDLEWARE = [
@@ -83,10 +92,11 @@ WSGI_APPLICATION = "clothing_rental.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "clothingrental",
+        "NAME": "Clothing_data_2",
         "HOST": "localhost",
         "USER": "root",
         "PASSWORD": "root1234"
+
     }
 }
 
@@ -131,3 +141,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'accounts.User'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

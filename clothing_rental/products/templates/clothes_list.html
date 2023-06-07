@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <h2>Clothes List</h2>
+    {% include "filter_form.html" %}
+    <p>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+        <a href="{% url 'new_clothing_item' %}" class="btn btn-primary">Add Clothing Item</a>
+            {% endif %}
+        {% endif %}
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Image</th>
+                {% if user.is_authenticated %}
+                        <th>#</th>
+                    {% if user.is_staff %}
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    {% endif %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in clothes %}
+            <tr>
+                <td>{{ item.category }}<a href="{% url 'category_list' %}"></td>
+                <td>{{ item.clothing_name }}</td>
+                <td><img src="{{ item.clothing_image.url }}" style="width: 200px"></td>
+                {% if user.is_authenticated %}
+                    <td><a href="{% url 'detail_clothes' item.id %}" class="btn btn-primary"> See details</a></td>
+                    {% if user.is_staff %}
+                        <td><a href="{% url 'delete_clothe' item.id %}">Delete</a></td>
+                        <td><a href="{% url 'clothes_update' item.id %}">Edit</a></td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

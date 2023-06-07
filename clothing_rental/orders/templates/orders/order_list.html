@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Order List</h2>
+    <p>
+        <a href="{% url 'add_order' %}"><button>Add Order</button></a>
+    </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Created date</th>
+                    <th>Date to be returned</th>
+                    <th>Confirmed returned date</th>
+                    <th>Status</th>
+                    <th>Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in order_list %}
+                <tr>
+                    <td>{{ object.user }}</td>
+                    <td>{{ object.created_date }}</td>
+                    <td>{{ object.date_to_be_returned }}</td>
+                    <td>{{ object.confirmed_returned_date }}</td>
+                    <td>{{ object.status }}</td>
+                    <td>{{ object.code }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

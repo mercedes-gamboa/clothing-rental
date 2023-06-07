@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Variation List</h2>
+    <p>
+        <a href="{% url 'add_variation' %}"><button class="btn">Add Variation</button></a>
+    </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Variation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for variation in variation_list %}
+                </tr>
+                <tr>
+                    <td>{{ variation.category}}</td>
+                    <td>{{ variation.variation_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
